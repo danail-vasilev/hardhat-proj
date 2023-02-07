@@ -11,14 +11,14 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  networks: {
-    // Goerli Testnet
-    goerli: {
-      url: `https://goerli.infura.io/v3/YOUR_INFURA_KEY`,
-      chainId: 5,
-      accounts: [`YOUR_PRIVATE_KEY`],
-    },
-  },
+  // networks: {
+  //   // Goerli Testnet
+  //   goerli: {
+  //     url: `https://goerli.infura.io/v3/`,
+  //     chainId: 5,
+  //     accounts: [``],
+  //   },
+  // },
 };
 
 export default config;
