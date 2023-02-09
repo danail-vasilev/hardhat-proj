@@ -14,13 +14,13 @@ contract USElection is Ownable {
 
     struct StateResult {
         string name;
-        uint votesBiden;
-        uint votesTrump;
+        uint256 votesBiden;
+        uint256 votesTrump;
         uint8 stateSeats;
     }
 
     event LogStateResult(uint8 winner, uint8 stateSeats, string state);
-    event LogElectionEnded(uint winner);
+    event LogElectionEnded(uint256 winner);
 
     modifier onlyActiveElection() {
         require(!electionEnded, "The election has ended already");
@@ -47,6 +47,7 @@ contract USElection is Ownable {
         }
 
         seats[winner] += result.stateSeats;
+        resultsSubmitted[result.name] = true;
 
         emit LogStateResult(winner, result.stateSeats, result.name);
     }
