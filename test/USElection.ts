@@ -68,7 +68,7 @@ describe("USElection", function () {
 
   it("Should throw on trying to end election that's already been ended", async function () {
     const [owner, addr1] = await ethers.getSigners();
-    expect(usElection.connect(addr1).endElection()).to.be.revertedWith(
+    expect(usElection.connect(owner).endElection()).to.be.revertedWith(
       "The election has ended already"
     );
     expect(await usElection.electionEnded()).to.equal(true); // Already Ended
@@ -81,7 +81,6 @@ describe("USElection", function () {
     );
   });
 
-  // Don't affect coverage - onlyOwner has already been tested
   it("Should throw on trying to submit state results when not owner", async function () {
     const [owner, addr1] = await ethers.getSigners();
     const stateResults = ["Ohaio", 800, 1200, 33];
