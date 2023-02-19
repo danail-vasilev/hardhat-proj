@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.17;
-pragma abicoder v2;
 import "./Ownable.sol";
 
 contract USElection is Ownable {
