@@ -18,6 +18,30 @@ const lazyImport = async (module: any) => {
   return await import(module);
 };
 
+task("deploy-nft", "Deploys NFT contract")
+  .addParam(
+    "isLocal",
+    "If true - deploys contract to localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/deploy-nft");
+    await main(getPrivateKey(isLocal), getRpcUrl(isLocal));
+  });
+
+task("interact-nft", "Interact with NFT contract")
+  .addParam(
+    "isLocal",
+    "If true - interacts with contract from localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/interact-nft");
+    await main(
+      getPrivateKey(isLocal),
+      getRpcUrl(isLocal),
+      getContractAddress(isLocal)
+    );
+  });
+
 task("deploy-eth-wrapper", "Deploys ETH Wrapper contract")
   .addParam(
     "isLocal",
