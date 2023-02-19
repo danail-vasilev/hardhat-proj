@@ -18,6 +18,30 @@ const lazyImport = async (module: any) => {
   return await import(module);
 };
 
+task("deploy-eth-wrapper", "Deploys ETH Wrapper contract")
+  .addParam(
+    "isLocal",
+    "If true - deploys contract to localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/deploy-eth-wrapper");
+    await main(getPrivateKey(isLocal), getRpcUrl(isLocal));
+  });
+
+task("interact-eth-wrapper", "Interact with ETH Wrapper contract")
+  .addParam(
+    "isLocal",
+    "If true - interacts with contract from localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/interact-eth-wrapper");
+    await main(
+      getPrivateKey(isLocal),
+      getRpcUrl(isLocal),
+      getContractAddress(isLocal)
+    );
+  });
+
 task("interact", "Interact with US Election contract")
   .addParam(
     "isLocal",
