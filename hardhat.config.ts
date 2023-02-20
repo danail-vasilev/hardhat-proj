@@ -18,6 +18,30 @@ const lazyImport = async (module: any) => {
   return await import(module);
 };
 
+task("deploy-car", "Deploys NFT car collection contract")
+  .addParam(
+    "isLocal",
+    "If true - deploys contract to localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/deploy-car");
+    await main(getPrivateKey(isLocal), getRpcUrl(isLocal));
+  });
+
+task("interact-car", "Interact with NFT car collection contract")
+  .addParam(
+    "isLocal",
+    "If true - interacts with contract from localhost network, otherwise goerli network"
+  )
+  .setAction(async ({ isLocal }) => {
+    const { main } = await lazyImport("./scripts/interact-car");
+    await main(
+      getPrivateKey(isLocal),
+      getRpcUrl(isLocal),
+      getContractAddress(isLocal)
+    );
+  });
+
 task("deploy-nft", "Deploys NFT contract")
   .addParam(
     "isLocal",
